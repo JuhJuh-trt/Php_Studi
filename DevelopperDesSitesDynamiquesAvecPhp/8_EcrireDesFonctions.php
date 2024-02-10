@@ -90,3 +90,86 @@ $someone = 'Eve';
 sayHi3($someone);
 //La valeur de $someone n'as pas été modifiée
 echo $someone;
+
+?>
+
+<!-- Passage par référence -->
+
+<?php
+
+//	$array est passé par référence à la fonction
+function emptyArray(array &$array)
+{
+	$array = array(); //	vide le tableau car parenthèses vides
+	//	On retourne une copie de $array
+	return $array;
+}
+$foo = array(1,2,3);
+print_r($foo);
+
+//$foo est passé par référence
+$empty = emptyArray($foo);
+
+print_r($foo); //$foo a été modifié, il est vide
+print_r($empty); //$empty est une copie de $foo, un tableau vide aussi
+
+?>
+
+<!-- Arguments nommés -->
+
+<?php
+
+//	array_fill(int $start_index, int $count, mixed $value): array {} 
+
+//$foo contient un tableau commençant à l'index 0, contenant 100 éléments initialisés à la valeur 'Bonjour !'
+$foo = array_fill(0, 100, 'Bonjour !'); // ou 
+$faa = array_fill(value: 'Bonjour !', count: 100, start_index: 0);
+
+//	print_r($foo);
+var_dump($foo == $faa);
+
+?>
+
+<!-- le type hinting de PHP -->
+
+<?php
+
+//	strlen(string $string): int
+function sayHi4(string $firstName): void
+{
+	//var_dump affiche le type et la valeur de la variable sur la sortie standard
+	var_dump($firstName);
+}
+sayHi4(42); // Affiche string(2) "42" car il attend une valeur de type string
+?>
+
+	- declaredeclare(strict_types=1); 
+		Cette instruction permet de passer en mode strict et va renvoyer une erreur si le typage de donnée n'est pas respecté dans les fonctions.
+		Par contre elle doit etre posé dans les premieres lignes du script
+
+
+<!-- Documenter sa fonction avec un DocBlock -->
+
+<?php
+//DocBlock:
+//	Un argument avec la chaîne @param <type de l'argument> <nomArgument> <Un commentaire>,
+//	Le type de retour avec @return <type>
+//	Un lien vers une ressource sur le web avec @link <URL>.
+
+/**
+*
+*
+*Retourne une chaîne de caractères qui salue une personne et lui indique l'heure *courante
+*<Une description éventuellement plus détaillée de ce que la fonction fait, sur *plusieurs lignes>
+*
+*	@param string $firstName Le prénom de la personne à saluer 
+* @param string $lastName Le nom de famille de la personne à saluer 
+* @link https://www.php.net/manual/fr/function.date.php
+*
+* @return string
+*/
+function sayHello(string $firstName, string $lastName): string
+{
+	$currentTime = date('H:i');
+	return "Bonjour " . $firstName . " " . $lastName . " ! Il est " . $currentTime ;
+}
