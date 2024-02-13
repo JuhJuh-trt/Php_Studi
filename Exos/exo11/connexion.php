@@ -1,10 +1,8 @@
-// Exemple 
-
 <?php
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +24,17 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
   $password = $_POST['username'];
+  if ($username === 'super' && $password === 'super') {
+    // initialisation de notre session en tant que superadministrateur
+    $_SESSION['role'] = 'super';
+    $_SESSION['username'] = $username;
+
+    // création cookie admin
+    setcookie('user', 'super', time() + 3600, '/');
+
+    // redirection
+    header("location:accueil.php");
+  }
   if ($username === 'admin' && $password === 'admin') {
     // initialisation de notre session en tant qu'administrateur
     $_SESSION['role'] = 'admin';
@@ -35,17 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     setcookie('user', 'admin', time() + 3600, '/');
 
     // redirection
-    header("location:HomeSession.php");
-  }
-  if ($username === 'user' && $password === 'user') {
-    // initialisation de notre session en tant qu'administrateur
-    $_SESSION['role'] = 'user';
-    $_SESSION['username'] = $username;
-
-    // création cookie admin
-    setcookie('user', 'user', time() + 3600, '/');
-
-    // redirection
-    header("location:HomeSession.php");
+    header("location:accueil.php");
   }
 }

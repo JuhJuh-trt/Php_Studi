@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +11,23 @@ session_start();
 </head>
 <body>
   <h2>Bienvenue sur la page d'ACCUEIL</h2>
-  <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
+  <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'super') { ?>
     <nav>
       <ul>
+        <a href="#"><li>Accueil</li></a>
         <a href="#"><li>Gestion des utilisateurs</li></a>
-        <a href="#"><li>Gestion des produits</li></a>
         <a href="#"><li>Deconnexion</li></a>
-        <p>Vous est connecté en tant qu'<?php echo $username;?></p>
+        <a href="serveur.php"><li>Données Serveur</li></a>
+        <p>Vous etes connecté en tant que <?php echo $_SESSION['role'];?></p>
       </ul>
     </nav>
 <?php  } else { ?>
       <nav>
       <ul>
         <a href="#"><li>Accueil</li></a>
-        <a href="#"><li>Produits</li></a>
+        <a href="#"><li>Gestion des utilisateurs</li></a>
         <a href="#"><li>Deconnexion</li></a>
-        <p>Vous est connecté en tant qu'<?php echo $username;?></p>
+        <p>Vous etes connecté en tant que <?php echo $_SESSION['role'];?></p>
       </ul>
     </nav>
 <?php  } ?>
