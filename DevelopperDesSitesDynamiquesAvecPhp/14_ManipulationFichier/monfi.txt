@@ -1,0 +1,2 @@
+Voici un texte d'exemple pour monfi.txt
+Nouvelle entrée
